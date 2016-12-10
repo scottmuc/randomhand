@@ -1,13 +1,18 @@
 package randomhand
 
+import (
+	"math/rand"
+)
+
 type Card struct {
-	Suit string
 	Rank string
+	Suit string
 }
 
 type Deck []Card
 type Hand []Card
 
+// NewStandardDeck returns a standard 52 card deck
 func NewStandardDeck() (deck Deck) {
 	ranks := []string{"A", "2", "3", "4", "5", "6", "7",
 		"8", "9", "T", "J", "Q", "K"}
@@ -27,12 +32,34 @@ func NewStandardDeck() (deck Deck) {
 	return
 }
 
+func dealCard(deck Deck) (card Card, newDeck Deck) {
+	card = deck[0]
+	newDeck = deck[1:]
+	return
+}
+
+// Deal deals a 5 card hand
 func Deal(deck Deck) (hand Hand, newDeck Deck) {
 	newDeck = deck
+	var card Card
 	for i := 0; i < 5; i++ {
-		hand = append(hand, newDeck[0])
-		newDeck = newDeck[1:]
+		card, newDeck = dealCard(newDeck)
+		hand = append(hand, card)
 	}
 
+	return
+}
+
+// Shuffle attempts to implement Fisher-Yates algorithm
+// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+func Shuffle(deck Deck) (shuffledDeck Deck) {
+	shuffledDeck = deck
+	length := len(deck)
+	for i := 1; i < length; i++ {
+		random := rand.Intn(i + 1)
+		if i != random {
+			shuffledDeck[random], shuffledDeck[i] = shuffledDeck[i], shuffledDeck[random]
+		}
+	}
 	return
 }

@@ -29,15 +29,19 @@ var _ = Describe("Deck", func() {
 })
 
 var _ = Describe("Deal", func() {
-	It("deals 5 cards from the top of the deck", func() {
-		deck := randomhand.Deck{
+	var deck randomhand.Deck
+
+	BeforeEach(func() {
+		deck = randomhand.Deck{
 			randomhand.Card{Rank: "A", Suit: "d"},
 			randomhand.Card{Rank: "A", Suit: "c"},
 			randomhand.Card{Rank: "A", Suit: "h"},
 			randomhand.Card{Rank: "A", Suit: "s"},
 			randomhand.Card{Rank: "2", Suit: "d"},
 		}
+	})
 
+	It("deals 5 cards from the top of the deck", func() {
 		playerHand, _ := randomhand.Deal(deck)
 
 		Expect(playerHand).To(HaveLen(5))
@@ -51,6 +55,16 @@ var _ = Describe("Deal", func() {
 	})
 
 	It("removes the dealt cards from the deck", func() {
+		_, newDeck := randomhand.Deal(deck)
+		Expect(newDeck).To(HaveLen(0))
+	})
+})
+
+// This is a horrible test, and it assumes that the
+// Shuffle function is implementing some type of
+// randomization
+var _ = Describe("Shuffle", func() {
+	It("changes the order of the cards", func() {
 		deck := randomhand.Deck{
 			randomhand.Card{Rank: "A", Suit: "d"},
 			randomhand.Card{Rank: "A", Suit: "c"},
@@ -59,8 +73,14 @@ var _ = Describe("Deal", func() {
 			randomhand.Card{Rank: "2", Suit: "d"},
 		}
 
-		_, newDeck := randomhand.Deal(deck)
+		shuffledDeck := randomhand.Shuffle(deck)
 
-		Expect(newDeck).To(HaveLen(0))
+		Expect(shuffledDeck).NotTo(Equal(randomhand.Hand{
+			randomhand.Card{Rank: "A", Suit: "d"},
+			randomhand.Card{Rank: "A", Suit: "c"},
+			randomhand.Card{Rank: "A", Suit: "h"},
+			randomhand.Card{Rank: "A", Suit: "s"},
+			randomhand.Card{Rank: "2", Suit: "d"},
+		}))
 	})
 })
