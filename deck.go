@@ -9,6 +9,10 @@ type Card struct {
 	Suit string
 }
 
+type Category struct {
+	Name string
+}
+
 type Deck []Card
 type Hand []Card
 
@@ -62,4 +66,45 @@ func Shuffle(deck Deck) (shuffledDeck Deck) {
 		}
 	}
 	return
+}
+
+func contains(slice []string, item string) bool {
+	for _, s := range slice {
+		if s == item {
+			return true
+		}
+	}
+	return false
+}
+
+func allSameSuit(hand Hand) bool {
+	suit := hand[0].Suit
+	for _, card := range hand {
+		if suit != card.Suit {
+			return false
+		}
+	}
+	return true
+}
+
+func isRoyalFlush(hand Hand) bool {
+	if !allSameSuit(hand) {
+		return false
+	}
+
+	ranks := []string{"10", "J", "Q", "K", "A"}
+	for _, card := range hand {
+		if !contains(ranks, card.Rank) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func Categorize(hand Hand) Category {
+	if isRoyalFlush(hand) {
+		return Category{Name: "RoyalFlush"}
+	}
+	return Category{Name: "StraightFlush"}
 }
