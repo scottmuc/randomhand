@@ -11,12 +11,30 @@ func Categorize(hand Hand) Category {
 	if isFlush(hand) && isStraight(hand) {
 		return Category{Name: "StraightFlush"}
 	}
-	return Category{Name: "FourOfAKind"}
+	if hasFourOfAKind(hand) {
+		return Category{Name: "FourOfAKind"}
+	}
+	return Category{Name: "FullHouse"}
 }
 
 func contains(slice []string, item string) bool {
 	for _, s := range slice {
 		if s == item {
+			return true
+		}
+	}
+	return false
+}
+
+func hasFourOfAKind(hand Hand) bool {
+	counter := map[string]int{}
+
+	for _, card := range hand {
+		counter[card.Rank] = counter[card.Rank] + 1
+	}
+
+	for _, count := range counter {
+		if count == 4 {
 			return true
 		}
 	}

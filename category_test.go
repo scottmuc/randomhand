@@ -47,3 +47,17 @@ var _ = Describe("FourOfAKind", func() {
 		Expect(category.Name).To(Equal("FourOfAKind"))
 	})
 })
+
+var _ = Describe("FullHouse", func() {
+	It("ranks 9h,9d,9c,8s,8h as a four of a kind", func() {
+		hand := randomhand.Hand{
+			randomhand.Cards["9h"],
+			randomhand.Cards["9d"],
+			randomhand.Cards["9c"],
+			randomhand.Cards["8s"],
+			randomhand.Cards["8h"],
+		}
+		category := randomhand.Categorize(hand)
+		Expect(category.Name).To(Equal("FullHouse"))
+	})
+})
