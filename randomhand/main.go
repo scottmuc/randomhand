@@ -16,6 +16,6 @@ func main() {
 	playerHand, shuffledDeck := randomhand.Deal(shuffledDeck)
 	computerHand, _ := randomhand.Deal(shuffledDeck)
 
-	fmt.Printf("Your hand: %v\n\n", playerHand)
-	fmt.Printf("Computer's hand: %v\n\n", computerHand)
+	fmt.Printf("Your hand: %v %v\n\n", playerHand, randomhand.Categorize(playerHand))
+	fmt.Printf("Computer's hand: %v %v\n\n", computerHand, randomhand.Categorize(computerHand))
 }
