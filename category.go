@@ -20,7 +20,10 @@ func Categorize(hand Hand) Category {
 	if isFlush(hand) {
 		return Category{Name: "Flush"}
 	}
-	return Category{Name: "Straight"}
+	if isStraight(hand) {
+		return Category{Name: "Straight"}
+	}
+	return Category{Name: "ThreeOfAKind"}
 }
 
 func contains(slice []string, item string) bool {
