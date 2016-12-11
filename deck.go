@@ -77,7 +77,7 @@ func contains(slice []string, item string) bool {
 	return false
 }
 
-func allSameSuit(hand Hand) bool {
+func isFlush(hand Hand) bool {
 	suit := hand[0].Suit
 	for _, card := range hand {
 		if suit != card.Suit {
@@ -87,8 +87,12 @@ func allSameSuit(hand Hand) bool {
 	return true
 }
 
+func isStraight(hand Hand) bool {
+	return true
+}
+
 func isRoyalFlush(hand Hand) bool {
-	if !allSameSuit(hand) {
+	if !isFlush(hand) {
 		return false
 	}
 
@@ -106,5 +110,8 @@ func Categorize(hand Hand) Category {
 	if isRoyalFlush(hand) {
 		return Category{Name: "RoyalFlush"}
 	}
-	return Category{Name: "StraightFlush"}
+	if isFlush(hand) && isStraight(hand) {
+		return Category{Name: "StraightFlush"}
+	}
+	return Category{Name: "FourOfAKind"}
 }
