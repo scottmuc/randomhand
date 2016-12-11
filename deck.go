@@ -1,6 +1,9 @@
 package randomhand
 
-import "math/rand"
+import (
+	"math/rand"
+	"strings"
+)
 
 type Card struct {
 	Rank  string
@@ -108,4 +111,17 @@ func Shuffle(deck Deck) (shuffledDeck Deck) {
 		}
 	}
 	return
+}
+
+func (c Card) String() string {
+	return c.Rank + c.Suit
+}
+
+func (h Hand) String() string {
+	cards := []string{}
+	for _, c := range h {
+		cards = append(cards, c.String())
+	}
+
+	return strings.Join(cards, ",")
 }

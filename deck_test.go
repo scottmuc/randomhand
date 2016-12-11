@@ -40,3 +40,17 @@ var _ = Describe("Shuffle", func() {
 		Expect(shuffledDeck).NotTo(Equal(randomhand.NewStandardDeck()))
 	})
 })
+
+var _ = Describe("Card", func() {
+	It("overrides String()", func() {
+		card := randomhand.Card{Suit: "d", Rank: "5"}
+		Expect(card.String()).To(Equal("5d"))
+	})
+})
+
+var _ = Describe("Hand", func() {
+	It("overrides String()", func() {
+		hand := testHand("5d", "Th")
+		Expect(hand.String()).To(Equal("5d,Th"))
+	})
+})
