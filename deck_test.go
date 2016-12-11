@@ -22,15 +22,8 @@ var _ = Describe("Deal", func() {
 
 	It("deals 5 cards from the top of the deck", func() {
 		playerHand, _ := randomhand.Deal(deck)
-
 		Expect(playerHand).To(HaveLen(5))
-		Expect(playerHand).To(Equal(randomhand.Hand{
-			randomhand.Cards["Ad"],
-			randomhand.Cards["Ac"],
-			randomhand.Cards["Ah"],
-			randomhand.Cards["As"],
-			randomhand.Cards["2d"],
-		}))
+		Expect(playerHand).To(Equal(testHand("Ad", "Ac", "Ah", "As", "2d")))
 	})
 
 	It("removes the dealt cards from the deck", func() {
@@ -39,27 +32,11 @@ var _ = Describe("Deal", func() {
 	})
 })
 
-// This is a horrible test, and it assumes that the
-// Shuffle function is implementing some type of
-// randomization
+// This test doesn't actually validate anything.
 var _ = Describe("Shuffle", func() {
 	It("changes the order of the cards", func() {
-		deck := randomhand.Deck{
-			randomhand.Cards["Ad"],
-			randomhand.Cards["Ac"],
-			randomhand.Cards["Ah"],
-			randomhand.Cards["As"],
-			randomhand.Cards["2d"],
-		}
-
+		deck := randomhand.NewStandardDeck()
 		shuffledDeck := randomhand.Shuffle(deck)
-
-		Expect(shuffledDeck).NotTo(Equal(randomhand.Hand{
-			randomhand.Cards["Ad"],
-			randomhand.Cards["Ac"],
-			randomhand.Cards["Ah"],
-			randomhand.Cards["As"],
-			randomhand.Cards["2d"],
-		}))
+		Expect(shuffledDeck).NotTo(Equal(randomhand.NewStandardDeck()))
 	})
 })

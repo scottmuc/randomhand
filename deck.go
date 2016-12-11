@@ -1,8 +1,6 @@
 package randomhand
 
-import (
-	"math/rand"
-)
+import "math/rand"
 
 type Card struct {
 	Rank  string
