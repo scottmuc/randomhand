@@ -61,3 +61,17 @@ var _ = Describe("FullHouse", func() {
 		Expect(category.Name).To(Equal("FullHouse"))
 	})
 })
+
+var _ = Describe("Flush", func() {
+	It("ranks 3h,8h,Qh,2h,9h as a flush", func() {
+		hand := randomhand.Hand{
+			randomhand.Cards["3h"],
+			randomhand.Cards["8h"],
+			randomhand.Cards["Qh"],
+			randomhand.Cards["2h"],
+			randomhand.Cards["9h"],
+		}
+		category := randomhand.Categorize(hand)
+		Expect(category.Name).To(Equal("Flush"))
+	})
+})
