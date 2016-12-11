@@ -8,6 +8,8 @@ import (
 )
 
 var _ = Describe("Deck", func() {
+
+	// This test has quesitonable value
 	It("has the standard 52 cards", func() {
 		deck := randomhand.NewStandardDeck()
 
@@ -33,11 +35,11 @@ var _ = Describe("Deal", func() {
 
 	BeforeEach(func() {
 		deck = randomhand.Deck{
-			randomhand.Card{Rank: "A", Suit: "d"},
-			randomhand.Card{Rank: "A", Suit: "c"},
-			randomhand.Card{Rank: "A", Suit: "h"},
-			randomhand.Card{Rank: "A", Suit: "s"},
-			randomhand.Card{Rank: "2", Suit: "d"},
+			randomhand.Cards["Ad"],
+			randomhand.Cards["Ac"],
+			randomhand.Cards["Ah"],
+			randomhand.Cards["As"],
+			randomhand.Cards["2d"],
 		}
 	})
 
@@ -46,11 +48,11 @@ var _ = Describe("Deal", func() {
 
 		Expect(playerHand).To(HaveLen(5))
 		Expect(playerHand).To(Equal(randomhand.Hand{
-			randomhand.Card{Rank: "A", Suit: "d"},
-			randomhand.Card{Rank: "A", Suit: "c"},
-			randomhand.Card{Rank: "A", Suit: "h"},
-			randomhand.Card{Rank: "A", Suit: "s"},
-			randomhand.Card{Rank: "2", Suit: "d"},
+			randomhand.Cards["Ad"],
+			randomhand.Cards["Ac"],
+			randomhand.Cards["Ah"],
+			randomhand.Cards["As"],
+			randomhand.Cards["2d"],
 		}))
 	})
 
@@ -66,21 +68,21 @@ var _ = Describe("Deal", func() {
 var _ = Describe("Shuffle", func() {
 	It("changes the order of the cards", func() {
 		deck := randomhand.Deck{
-			randomhand.Card{Rank: "A", Suit: "d"},
-			randomhand.Card{Rank: "A", Suit: "c"},
-			randomhand.Card{Rank: "A", Suit: "h"},
-			randomhand.Card{Rank: "A", Suit: "s"},
-			randomhand.Card{Rank: "2", Suit: "d"},
+			randomhand.Cards["Ad"],
+			randomhand.Cards["Ac"],
+			randomhand.Cards["Ah"],
+			randomhand.Cards["As"],
+			randomhand.Cards["2d"],
 		}
 
 		shuffledDeck := randomhand.Shuffle(deck)
 
 		Expect(shuffledDeck).NotTo(Equal(randomhand.Hand{
-			randomhand.Card{Rank: "A", Suit: "d"},
-			randomhand.Card{Rank: "A", Suit: "c"},
-			randomhand.Card{Rank: "A", Suit: "h"},
-			randomhand.Card{Rank: "A", Suit: "s"},
-			randomhand.Card{Rank: "2", Suit: "d"},
+			randomhand.Cards["Ad"],
+			randomhand.Cards["Ac"],
+			randomhand.Cards["Ah"],
+			randomhand.Cards["As"],
+			randomhand.Cards["2d"],
 		}))
 	})
 })

@@ -42,7 +42,7 @@ func isRoyalFlush(hand Hand) bool {
 		return false
 	}
 
-	ranks := []string{"10", "J", "Q", "K", "A"}
+	ranks := []string{"T", "J", "Q", "K", "A"}
 	for _, card := range hand {
 		if !contains(ranks, card.Rank) {
 			return false
