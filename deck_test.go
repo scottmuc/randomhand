@@ -7,29 +7,6 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Deck", func() {
-
-	// This test has quesitonable value
-	It("has the standard 52 cards", func() {
-		deck := randomhand.NewStandardDeck()
-
-		ranks := []string{"A", "2", "3", "4", "5", "6", "7",
-			"8", "9", "T", "J", "Q", "K"}
-
-		suits := []string{"d", "c", "h", "s"}
-
-		for i := 0; i < len(ranks); i++ {
-			for n := 0; n < len(suits); n++ {
-				sampleCard := randomhand.Card{
-					Suit: suits[n],
-					Rank: ranks[i],
-				}
-				Expect(deck).To(ContainElement(sampleCard))
-			}
-		}
-	})
-})
-
 var _ = Describe("Deal", func() {
 	var deck randomhand.Deck
 
