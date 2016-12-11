@@ -103,3 +103,17 @@ var _ = Describe("ThreeOfAKind", func() {
 		Expect(category.Name).To(Equal("ThreeOfAKind"))
 	})
 })
+
+var _ = Describe("TwoPair", func() {
+	It("ranks 3h,3c,6s,6h,7s as two pair", func() {
+		hand := randomhand.Hand{
+			randomhand.Cards["3h"],
+			randomhand.Cards["3c"],
+			randomhand.Cards["6s"],
+			randomhand.Cards["6h"],
+			randomhand.Cards["7s"],
+		}
+		category := randomhand.Categorize(hand)
+		Expect(category.Name).To(Equal("TwoPair"))
+	})
+})

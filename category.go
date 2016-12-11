@@ -23,7 +23,10 @@ func Categorize(hand Hand) Category {
 	if isStraight(hand) {
 		return Category{Name: "Straight"}
 	}
-	return Category{Name: "ThreeOfAKind"}
+	if hasThreeOfAKind(hand) {
+		return Category{Name: "ThreeOfAKind"}
+	}
+	return Category{Name: "TwoPair"}
 }
 
 func contains(slice []string, item string) bool {
