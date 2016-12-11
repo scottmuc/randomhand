@@ -17,7 +17,10 @@ func Categorize(hand Hand) Category {
 	if hasThreeOfAKind(hand) && hasAPair(hand) {
 		return Category{Name: "FullHouse"}
 	}
-	return Category{Name: "Flush"}
+	if isFlush(hand) {
+		return Category{Name: "Flush"}
+	}
+	return Category{Name: "Straight"}
 }
 
 func contains(slice []string, item string) bool {
