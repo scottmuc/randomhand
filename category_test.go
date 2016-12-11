@@ -119,7 +119,7 @@ var _ = Describe("TwoPair", func() {
 })
 
 var _ = Describe("OnePair", func() {
-	It("ranks 3h,3c,9s,6h,7s as two pair", func() {
+	It("ranks 3h,3c,9s,6h,7s as one pair", func() {
 		hand := randomhand.Hand{
 			randomhand.Cards["3h"],
 			randomhand.Cards["3c"],
@@ -129,5 +129,19 @@ var _ = Describe("OnePair", func() {
 		}
 		category := randomhand.Categorize(hand)
 		Expect(category.Name).To(Equal("OnePair"))
+	})
+})
+
+var _ = Describe("HighCard", func() {
+	It("ranks 3h,2c,9s,6h,7s as high card", func() {
+		hand := randomhand.Hand{
+			randomhand.Cards["3h"],
+			randomhand.Cards["2c"],
+			randomhand.Cards["9s"],
+			randomhand.Cards["6h"],
+			randomhand.Cards["7s"],
+		}
+		category := randomhand.Categorize(hand)
+		Expect(category.Name).To(Equal("HighCard"))
 	})
 })

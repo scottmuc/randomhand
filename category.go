@@ -29,7 +29,10 @@ func Categorize(hand Hand) Category {
 	if pairCount(hand) == 2 {
 		return Category{Name: "TwoPair"}
 	}
-	return Category{Name: "OnePair"}
+	if pairCount(hand) == 1 {
+		return Category{Name: "OnePair"}
+	}
+	return Category{Name: "HighCard"}
 }
 
 func contains(slice []string, item string) bool {
