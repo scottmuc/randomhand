@@ -14,7 +14,7 @@ func Categorize(hand Hand) Category {
 	if hasFourOfAKind(hand) {
 		return Category{Name: "FourOfAKind"}
 	}
-	if hasThreeOfAKind(hand) && hasAPair(hand) {
+	if hasThreeOfAKind(hand) && pairCount(hand) == 1 {
 		return Category{Name: "FullHouse"}
 	}
 	if isFlush(hand) {
@@ -26,7 +26,10 @@ func Categorize(hand Hand) Category {
 	if hasThreeOfAKind(hand) {
 		return Category{Name: "ThreeOfAKind"}
 	}
-	return Category{Name: "TwoPair"}
+	if pairCount(hand) == 2 {
+		return Category{Name: "TwoPair"}
+	}
+	return Category{Name: "OnePair"}
 }
 
 func contains(slice []string, item string) bool {
@@ -68,19 +71,20 @@ func hasThreeOfAKind(hand Hand) bool {
 	return false
 }
 
-func hasAPair(hand Hand) bool {
+func pairCount(hand Hand) int {
 	counter := map[string]int{}
 
 	for _, card := range hand {
 		counter[card.Rank] = counter[card.Rank] + 1
 	}
 
+	pairCount := 0
 	for _, count := range counter {
 		if count == 2 {
-			return true
+			pairCount++
 		}
 	}
-	return false
+	return pairCount
 }
 
 func isFlush(hand Hand) bool {
